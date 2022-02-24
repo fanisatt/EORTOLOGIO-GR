@@ -4,17 +4,22 @@
 // zenity --calendar --date-format='%Y-%m-%d , %a'
 
 
-#include<graphics.h>
-#include<SDL2/SDL.h>
+#include <graphics.h>
+#include <SDL2/SDL.h>
 //#include <SDL2/SDL_ttf.h>
-#include<stdio.h>
-#include<time.h>
-#include<ctype.h>
-#include<string.h>
-#include<stdlib.h>
-#include<unistd.h>
+#include <stdio.h>
+#include <time.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <memory.h>
 #include <pwd.h>
+#include <errno.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <dirent.h>
 
 #define pause while (!(event())) refresh()
 #define GR 1
@@ -27,6 +32,9 @@ void gotoxy(int x, int y);
 // Clear terminal screen and set cursor to top left
 void clrscr();
 // ***************************************************
+int fileselector( char *popor, char *old , int max);
+int Start_strstr(char *big, char *sma);
+FILE * read_pipe( char *popor );
 int fastmenu_show(short int plbut, char menu[][120], char *but_name, unsigned short int moux, unsigned short int mouy );
 char * pedaba_calendar(short int arped);
 short int _show_month (unsigned short int xt, unsigned short int yt, unsigned short int uyear,unsigned short int umonth,unsigned short int uday,unsigned short int stamonth);
@@ -140,7 +148,7 @@ int outnoto(int x, int y, char *str, int lang);
 void *pronoto();
 void *icontomem (char *filename,int transp);
 int bmptodisk (char *bmpname, unsigned int size_bytes,int width, int height);
-int input(char *str, int *pxl,int *pyt,int *pxr,int *pyb,int orio,short int arped,unsigned short int wherp1);
+int input(unsigned char *str, int *pxl,int *pyt,int *pxr,int *pyb,int orio,short int arped,unsigned short int wherp1);
 void proinput ();
 void fidicls(int x, int y, int x1, int y1 , int red , int green, int blue);
 void cls();
@@ -328,7 +336,7 @@ struct fanfield {
 
 extern char savedbpath[768] , LDdbfile[1024] ;
 extern char *loaddbfile;
-extern char str1024 [1386];        // Γενικής Χρήσης str
+extern char str1024 [2048];        // Γενικής Χρήσης str
 extern int pdaba[4] , pdaca;
 extern unsigned short int dblasize, dbfisize , dbplgr , dbplera, dbpg , dbcurpage , dbar , dbrecxr , dbscrxr ,dbmag , dbtop , dbselxr , dbred , dbgreen , dbblack , dbyel , dbhelpcol ;
 extern short int dbfinum , dblanum ;
@@ -384,7 +392,7 @@ extern unsigned char  *synolo_fnts ;
 extern unsigned int size_fnts;
 extern void *inp_mem_ghost ;
 extern unsigned short int gocards , firstcrit; // gocards = πόσες κάρτες ικανοποιούν κριτήρια , firstcrit = ο α/α της πρώτης κάρτας ...
-extern char submenu[14][120];
+extern char submenu[15][120];
 extern unsigned short int dbaspro;
 
 extern struct {
@@ -408,3 +416,11 @@ extern unsigned char langex ;
 extern short int logand ;
 extern unsigned char normdeigma[22] ;
 extern int fide_fpdb , fide_fpcard ;
+extern char big_char [3096];
+extern int status, fsel_code ;
+extern char efarm_path[26] ;
+extern int nofire , nochrom ;
+extern void *remem;
+extern pid_t pid ;
+extern char *orisma[3];
+extern SDL_DisplayMode DM;
