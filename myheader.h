@@ -24,7 +24,7 @@
 #define pause while (!(event())) refresh()
 #define GR 1
 #define EN 0
-#define ttf 8
+#define ttf 48
 
 // Set cursor position
 void gotoxy(int x, int y);
@@ -32,6 +32,8 @@ void gotoxy(int x, int y);
 // Clear terminal screen and set cursor to top left
 void clrscr();
 // ***************************************************
+void My_readimagefile(char *filename, int x, int y);
+int _realputicon (int x1,int y1,void *mem1) ;
 int fileselector( char *popor, char *old , int max);
 int Start_strstr(char *big, char *sma);
 FILE * read_pipe( char *popor );
@@ -52,22 +54,22 @@ int mystr_show(short int font, unsigned char *mystr, char *headername, unsigned 
 void _outfanis_colxr(unsigned int font, char *str ,  unsigned short int x, unsigned short int y, unsigned short int xr, int *cchxr, int *cbkxr);
 int filehelp_show(short int font, char *filename, char *helpname, unsigned short int moux, unsigned short int mouy, int *cochxr , int *cobkxr ) ;
 unsigned short int hlp_txt_scroll (short int font, unsigned short int cur, unsigned char *str, unsigned short int ar, short int xl , short int yt , short int xr , short int yb , int *cochxr , int *cobkxr);
-void *prosans_21();
+//void *prosans_21();
 int spec_alert (int id,char *seleo,char *seleo1, char *img_file , int *spbkxr);
 //int photofield_show_button(void *mem_str, unsigned int ar, short int arped, short int arped2, short int *sorton , unsigned short int *disk_dom);
 //int info_dbsec(short int arped , unsigned short int *ar_dom);
-void *proimpact_20();
+//void *proimpact_20();
 int smmenu_show(short int plbut, char menu[][120], char *but_name, unsigned short int moux, unsigned short int mouy );
 int bmptodisk_new (char *bmpname, unsigned int size_bytes,int width, int height);
-void *procaviar_22();
+//void *procaviar_22();
 void *convertinp_strstr  (short int left_right, char  *str, short int arped, unsigned short int *how_many, unsigned short int *cur);
-void *prosans_18();
-int fonts_show(void *mem_str, char *data, unsigned short int ar, unsigned short int orio, char *but_name, short int *sorton,short int delon, int *proxchxr, int *proxbkxr , int *proxslxr );
+//void *prosans_18();
+int fonts_show(char *header, void *mem_str, char *data, unsigned short int ar, unsigned short int orio, char *but_name, short int *sorton,short int delon, int *proxchxr, int *proxbkxr , int *proxslxr );
 int info_dbfnt();
-void *protimes_18();
+//void *protimes_18();
 void hide_help(unsigned short int xt1, unsigned short int yt1);
 void show_help(char *text_help,unsigned short int xt, unsigned short int yt, unsigned short int *xt1 , unsigned short int *yt1);
-void *proarial_12();
+//void *proarial_12();
 //int input_compl_search ();
 //unsigned short int field_txt_scrollsearch (short int arped, unsigned short int cur, short int xl , short int yt , short int xr , short int yb , unsigned short int orio , int *cochxr , int *cobkxr, int *coslxr);
 //unsigned char * convert_and_strstr  (short int arped, unsigned short int *how_many, unsigned short int *cur);
@@ -145,7 +147,7 @@ int Wbmptodisk (char *bmpname, unsigned int size_bytes,short int width, short in
 int outnoto_sma(int x, int y, char *str, int lang);
 int outnoto_big(int x, int y, char *str, int lang, int syntx , int synty);
 int outnoto(int x, int y, char *str, int lang);
-void *pronoto();
+//void *pronoto();
 void *icontomem (char *filename,int transp);
 int bmptodisk (char *bmpname, unsigned int size_bytes,int width, int height);
 int input(unsigned char *str, int *pxl,int *pyt,int *pxr,int *pyb,int orio,short int arped,unsigned short int wherp1);
@@ -153,7 +155,7 @@ void proinput ();
 void fidicls(int x, int y, int x1, int y1 , int red , int green, int blue);
 void cls();
 int outsouv(int x, int y, char *str, int lang);
-void * prosouv();
+//void * prosouv();
 void areacls (int x,int y,int r,int d,int kok,int pra,int mpl);
 void qcls (int kok,int pra,int mpl);
 void efecls (int x,int y,int w,int h,int kok,int pra,int mpl);
@@ -171,20 +173,19 @@ extern struct viewporttype info;
 extern struct viewporttype *info_p ;
 
 
-extern void *greek_addr, *souv_addr , *mem_sarial;
-extern void *mem_small  , *mem_times , *mem_sans , *mem_caviar , *mem_impact ;
+// extern void *greek_addr, *souv_addr , *mem_sarial , *mem_times , *mem_sans , *mem_caviar , *mem_impact ; 
+extern void *mem_small ;
+extern void *mem_Font[ttf];
 
 extern struct fansouv {
     char who;
     short int wid;
     short int hei;
     void *where;
-} souv[165] ; // Σύνολο χαρακτήρων +1//
+} myfont[ttf][165] ;  ; // Σύνολο χαρακτήρων +1//
 
-extern struct fansouv nouv[165] , sarial[165] , times18[165] , sanser18[165], caviar22[165] , impact20[165] ,  sanser21[165] ;
-extern struct fansouv *gouv;
+extern struct fansouv *souv , *nouv , *gouv ,*sarial ;
 
-extern struct fansouv *myfont[ttf];
 extern short int myfont_hei[ttf];
 extern short int myfont_wid[ttf];
 extern char myfont_name [ttf][20]; 
@@ -195,12 +196,12 @@ unsigned char faprint [57][2];
 unsigned int sort [57][2];
 } engl , grek ;
 
-extern char user_name[36];
+extern char user_name[82];
 extern char file_1[1024];
 extern char file_2[1024];
 extern char str1kb[1386];
 extern unsigned char file_3[512];
-extern char path_name[512];
+extern char path_name[1024];
 extern short int keyb_gr  ;
 extern short int keyb_us  ;
 
@@ -424,3 +425,33 @@ extern void *remem;
 extern pid_t pid ;
 extern char *orisma[3];
 extern SDL_DisplayMode DM;
+
+extern int notes_font , eortes_font , names_font , ponom_font , eortologio_font , pagkosm_font , personal_font , mobeort_font ;
+
+extern char *Header ;
+
+extern DIR * fold_p;
+
+extern char eggr_str[40] , picts_str[40] ; 
+
+extern char user_path[512];
+
+enum local_font { souvenir=0 , notosans_22n , 
+    arial_12, times_18 , 
+    sanserif_18, caviar , 
+    impact , sanserif_21, 
+    notosans_10b , notosans_11b, 
+    notosans_12n, notosans_12b, 
+    notosans_14n, notosans_14b, 
+    notosans_16n, notosans_16b, 
+    notosans_18n , notosans_18b , 
+    notosans_20n , notosans_20b,
+    notosans_24n , notosans_28n, notosans_32n,
+    notoserif_20n, notoserif_20b,
+    theokritos ,  
+    neohell_13b , neohell_14n , neohell_16n , neohell_18n ,  
+    neohell_20n, neohell_20b , neohell_22n, neohell_22b , neohell_24n, neohell_28n , neohell_32n ,
+    calligra_20n, calligra_22n , calligra_24n , 
+    bookman_14n,bookman_16n,bookman_18n,
+    bookman_20n, bookman_22n, bookman_24n, bookman_28n, bookman_32n } ;
+
