@@ -32,6 +32,8 @@ void gotoxy(int x, int y);
 // Clear terminal screen and set cursor to top left
 void clrscr();
 // ***************************************************
+void hide_help_inp(unsigned short int xt1, unsigned short int yt1);
+void show_help_inp(char *text_help,unsigned short int xt, unsigned short int yt, unsigned short int *xt1 , unsigned short int *yt1);
 void My_readimagefile(char *filename, int x, int y);
 int _realputicon (int x1,int y1,void *mem1) ;
 int fileselector( char *popor, char *old , int max);
@@ -436,6 +438,8 @@ extern char eggr_str[40] , picts_str[40] ;
 
 extern char user_path[512];
 
+extern short int shlp ;
+
 enum local_font { souvenir=0 , notosans_22n , 
     arial_12, times_18 , 
     sanserif_18, caviar , 
@@ -454,4 +458,5 @@ enum local_font { souvenir=0 , notosans_22n ,
     calligra_20n, calligra_22n , calligra_24n , 
     bookman_14n,bookman_16n,bookman_18n,
     bookman_20n, bookman_22n, bookman_24n, bookman_28n, bookman_32n } ;
+
 
