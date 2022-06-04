@@ -32,6 +32,7 @@ void gotoxy(int x, int y);
 // Clear terminal screen and set cursor to top left
 void clrscr();
 // ***************************************************
+int inp_fonts_show(char *header, void *mem_str, char *data, unsigned short int ar, unsigned short int orio, char *but_name, short int *sorton,short int delon, int *proxchxr, int *proxbkxr , int *proxslxr );
 void hide_help_inp(unsigned short int xt1, unsigned short int yt1);
 void show_help_inp(char *text_help,unsigned short int xt, unsigned short int yt, unsigned short int *xt1 , unsigned short int *yt1);
 void My_readimagefile(char *filename, int x, int y);
@@ -66,7 +67,7 @@ int bmptodisk_new (char *bmpname, unsigned int size_bytes,int width, int height)
 //void *procaviar_22();
 void *convertinp_strstr  (short int left_right, char  *str, short int arped, unsigned short int *how_many, unsigned short int *cur);
 //void *prosans_18();
-int fonts_show(char *header, void *mem_str, char *data, unsigned short int ar, unsigned short int orio, char *but_name, short int *sorton,short int delon, int *proxchxr, int *proxbkxr , int *proxslxr );
+int fonts_show(int isxfont, char *header, void *mem_str, char *data, unsigned short int ar, unsigned short int orio, char *but_name, short int *sorton,short int delon, int *proxchxr, int *proxbkxr , int *proxslxr );
 int info_dbfnt();
 //void *protimes_18();
 void hide_help(unsigned short int xt1, unsigned short int yt1);
@@ -440,6 +441,18 @@ extern char user_path[512];
 
 extern short int shlp ;
 
+extern unsigned int sdlwin1 , sdlwin2 ;
+
+extern short int secwin ;
+
+extern char diary_entry[128];
+
+extern unsigned char temp_notes[60004];
+
+extern unsigned char notes_str[60004];
+
+extern unsigned char diary_notes[60004];
+
 enum local_font { souvenir=0 , notosans_22n , 
     arial_12, times_18 , 
     sanserif_18, caviar , 
@@ -453,7 +466,7 @@ enum local_font { souvenir=0 , notosans_22n ,
     notosans_24n , notosans_28n, notosans_32n,
     notoserif_20n, notoserif_20b,
     theokritos ,  
-    neohell_13b , neohell_14n , neohell_16n , neohell_18n ,  
+    neohell_13b , neohell_14b , neohell_16n , neohell_18n ,  
     neohell_20n, neohell_20b , neohell_22n, neohell_22b , neohell_24n, neohell_28n , neohell_32n ,
     calligra_20n, calligra_22n , calligra_24n , 
     bookman_14n,bookman_16n,bookman_18n,
